@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet id="202010211812" author="Vadim Morev">
+        <createTable tableName="t_movie">
+            <column name="id"
+                    autoIncrement="true"
+                    startWith="1"
+                    type="bigint">
+                <constraints primaryKey="true"
+                             primaryKeyName="movie_id_pk"/>
+            </column>
+            <column name="title"
+                    type="varchar(128)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="duration"
+                    type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cost"
+                    type="numeric(14,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description"
+                    type="varchar(255)"/>
+            <column name="rank"
+                    type="numeric(1,1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status"
+                    type="varchar(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="release_start"
+                    type="timestamp"/>
+            <column name="release_end"
+                    type="timestamp"/>
+        </createTable>
+
+        <createTable tableName="t_order">
+            <column name="id"
+                    autoIncrement="true"
+                    startWith="1"
+                    type="bigint">
+                <constraints primaryKey="true"
+                             primaryKeyName="order_id_pk"/>
+            </column>
+            <column name="client_name"
+                    type="varchar(64)"/>
+            <column name="staff_name"
+                    type="varchar(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at"
+                    type="timestamp"/>
+        </createTable>
+
+        <createTable tableName="t_order_to_movie">
+            <column name="id"
+                    autoIncrement="true"
+                    startWith="1"
+                    type="bigint">
+                <constraints primaryKey="true"
+                             primaryKeyName="order_to_movie_id_pk"/>
+            </column>
+            <column name="order_id"
+                    type="bigint">
+                <constraints nullable="false"
+                             foreignKeyName="fk_order_to_movie_order_id"
+                             references="t_order"/>
+            </column>
+            <column name="movie_id"
+                    type="bigint">
+                <constraints nullable="false"
+                             foreignKeyName="fk_order_to_movie_movie_id"
+                             references="t_movie"/>
+            </column>
+            <column name="quantity"
+                    type="int"
+                    defaultValue="1">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <!--        -->
+        <!--        -->
+        <!--        -->
+        <!--        -->
+        <!--        <createTable tableName="house">-->
+        <!--            <column name="id" type="bigint">-->
+        <!--                <constraints primaryKey="true" primaryKeyName="house_id_pk" />-->
+        <!--            </column>-->
+        <!--            <column name="owner" type="varchar(250)">-->
+        <!--                <constraints unique="true" uniqueConstraintName="house_owner_unq" />-->
+        <!--            </column>-->
+        <!--            <column name="fully_paid" type="boolean" defaultValueBoolean="false"></column>-->
+        <!--        </createTable>-->
+        <!--        <createTable tableName="item">-->
+        <!--            <column name="id" type="bigint">-->
+        <!--                <constraints primaryKey="true" primaryKeyName="item_id_pk" />-->
+        <!--            </column>-->
+        <!--            <column name="name" type="varchar(250)" />-->
+        <!--            <column name="house_id" type="bigint">-->
+        <!--                <constraints nullable="false" />-->
+        <!--            </column>-->
+        <!--        </createTable>-->
+        <!--        <addAutoIncrement tableName="house" columnName="id" columnDataType="bigint" startWith="1" incrementBy="1" />-->
+        <!--        <addAutoIncrement tableName="item" columnName="id" columnDataType="bigint" startWith="1" incrementBy="1" />-->
+        <!--        <createSequence sequenceName="hibernate_sequence" incrementBy="1" startValue="1" />-->
+        <!--        <addForeignKeyConstraint baseTableName="item" baseColumnNames="house_id" constraintName="item_house_id_fk" referencedTableName="house" referencedColumnNames="id" />-->
+    </changeSet>
+</databaseChangeLog>
