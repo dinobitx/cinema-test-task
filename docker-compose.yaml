@@ -15,6 +15,21 @@ services:
     networks:
       - backendnetwork
 
+  test-task:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: test-task-bknd
+    ports:
+      - 8075:8075
+      - 18075:18075
+    depends_on:
+        - pg
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+    networks:
+      - backendnetwork
+
 
 networks:
   backendnetwork:

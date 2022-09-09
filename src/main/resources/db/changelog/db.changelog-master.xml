@@ -28,7 +28,7 @@
             <column name="description"
                     type="varchar(255)"/>
             <column name="rank"
-                    type="numeric(1,1)">
+                    type="numeric(2,1)">
                 <constraints nullable="false"/>
             </column>
             <column name="status"
