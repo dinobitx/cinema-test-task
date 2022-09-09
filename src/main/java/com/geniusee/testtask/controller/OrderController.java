@@ -20,7 +20,7 @@ public class OrderController {
 
     @GetMapping
     public ResponseEntity<GenericApiResponse<Page<OrderDTO>>> findAll(@RequestParam
-                                                                   @ApiParam(example = "title:Order;") final String search,
+                                                                   @ApiParam(example = "clientName:John;") final String search,
                                                                    final Pageable pageable) {
         final Page<OrderDTO> response = service.findAll(search, pageable);
         return ResponseEntity.ok(new GenericApiResponse<>(response));
